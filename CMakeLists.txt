@@ -9,19 +9,16 @@ if (NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     message(FATAL_ERROR "Host ${CMAKE_SYSTEM_NAME} is not supported!")
 endif()
 
-message("Compiler: ${CMAKE_C_COMPILER_ID} Version: ${CMAKE_C_COMPILER_VERSION}")
-
 option(BNGBLASTER_TESTS "Build unit tests (requires cmocka)" OFF)
 option(BNGBLASTER_NETMAP "Build with netmap support" OFF)
+option(BNGBLASTER_DPDK "Build with DPDK support" OFF)
 
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message("Debug Build")
     set(CMAKE_BUILD_TYPE Debug)
     add_definitions(-DBBL_DEBUG)
 else()
-    message("Release Build")
     set(CMAKE_BUILD_TYPE Release)
 endif()
 

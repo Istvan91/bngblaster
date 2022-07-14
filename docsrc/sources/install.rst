@@ -98,6 +98,15 @@ manually build version as shown below:
     SHA: df453a5ee9dbf6440aefbfb9630fa0f06e326d44
     IO Modes: packet_mmap_raw (default), packet_mmap, raw
 
+Build with DPDK Support
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: none
+
+    mkdir build
+    cd build
+    cmake -D -DBNGBLASTER_DPDK=ON .
+
 Install
 ^^^^^^^
 
@@ -116,12 +125,14 @@ Building and running unit tests requires CMocka to be installed:
 
 .. code-block:: none
 
-    sudo apt install libcmocka-dev
+    sudo apt install libcmocka-dev libpcap-dev
 
 The option `BNGBLASTER_TESTS` enables to build unit tests.
 
 .. code-block:: none
 
+    mkdir build
+    cd build
     cmake -DCMAKE_BUILD_TYPE=Debug -DBNGBLASTER_TESTS=ON .
     make all
     make test
@@ -165,4 +176,3 @@ as shown below:
 
     # As normal user:
     bngblaster -C config.json -I
-

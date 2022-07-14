@@ -230,6 +230,9 @@ bbl_print_version (void)
 #ifdef BNGBLASTER_NETMAP
     printf(", netmap");
 #endif
+#ifdef BNGBLASTER_DPDK
+    printf(", dpdk");
+#endif
     printf("\n");
 }
 

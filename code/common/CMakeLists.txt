@@ -16,7 +16,7 @@ set(COMMON_SOURCES ${COMMON_SOURCES} PARENT_SCOPE)
 
 # Build tests only if required
 if(BNGBLASTER_TESTS)
-    message("Build common tests")
+    message(STATUS "Build common tests")
     enable_testing()
     add_subdirectory(test)
 endif()

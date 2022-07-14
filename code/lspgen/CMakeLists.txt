@@ -23,7 +23,7 @@ install(TARGETS lspgen DESTINATION sbin)
 
 # Build tests only if required
 if(BNGBLASTER_TESTS)
-    message("Build lspgen tests")
+    message(STATUS "Build lspgen tests")
     enable_testing()
     add_subdirectory(test)
 endif()

@@ -43,8 +43,26 @@ target_link_libraries(bngblaster ${LWIP_SANITIZER_LIBS} lwipcore lwipcontribport
 
 # Add experimental netmap support
 if(BNGBLASTER_NETMAP)
+    message(STATUS "Build bngblaster with netmap support")
     add_definitions(-DBNGBLASTER_NETMAP)
     target_link_libraries(bngblaster netmap)
+endif()
+
+# Add experimental DPDK support
+if(BNGBLASTER_DPDK)
+    message(STATUS "Build bngblaster with DPDK support")
+    find_package(PkgConfig REQUIRED)
+    if (PKG_CONFIG_FOUND)
+        pkg_check_modules(DPDK "libdpdk")
+        if (DPDK_FOUND)
+            message(STATUS "Found DPDK via pkg-config")
+            add_definitions(-DBNGBLASTER_DPDK)
+            add_definitions(${DPDK_CFLAGS})
+            set(DPDK_LIBS -Wl,--whole-archive ${DPDK_LIBRARIES} -lpthread -lnuma -ldl -Wl,--no-whole-archive)
+            include_directories(${DPDK_INCLUDE_DIR})    
+            target_link_libraries(bngblaster ${DPDK_LIBS})
+        endif()
+    endif()    
 endif()
 
 if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0)
@@ -57,7 +75,7 @@ install(TARGETS bngblaster DESTINATION sbin)
 
 # Build tests only if required
 if(BNGBLASTER_TESTS)
-    message("Build bngblaster tests")
+    message(STATUS "Build bngblaster tests")
     enable_testing()
     add_subdirectory(test)
 endif()
