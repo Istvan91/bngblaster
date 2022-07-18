@@ -683,8 +683,6 @@ bbl_sessions_init(bbl_ctx_s *ctx)
     ctx->access_statistics = calloc(ctx->config.sessions, sizeof(*ctx->access_statistics));
     ctx->network_statistics = calloc(ctx->config.sessions, sizeof(*ctx->network_statistics));
 
-    memset(ctx->access_statistics, 0, ctx->config.sessions * sizeof(*ctx->access_statistics));
-    memset(ctx->network_statistics, 0, ctx->config.sessions * sizeof(*ctx->network_statistics));
     access_config = ctx->config.access_config;
 
     /* For equal distribution of sessions over access configurations
